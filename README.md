@@ -1,6 +1,23 @@
-## Build
+## Installation
+
+:warning: This repo was made with ROS2 Jazzy and Gazebo Harmonic on an Ubuntu 24.04 Virtual Machine :warning:
+
+### ROS2
+
+Follow instructions from: https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html
+
+### Gazebo
+
 ```
+sudo apt-get install ros-jazzy-ros-gz
+```
+
+## Build and source package
+```
+source /opt/ros/jazzy/setup.bash
 colcon build --symlink-install
+
+source install/setup.bash 
 ```
 
 ## Run in Gazebo
