@@ -34,7 +34,7 @@ ros2 run joint_state_publisher_gui joint_state_publisher_gui
 Add TF and RobotModel manually, or use rviz file in `rviz/view_robot.rviz`
 
 ## TODO
-- []Differential wheels robot mode
+- [ ]Differential wheels robot mode
     - [ ] look at gazebo bridge configuration
     - [ ] add keyboard control for simulation
 
