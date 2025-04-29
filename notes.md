@@ -20,3 +20,6 @@ Installing
 ```
 sudo apt install ros-jazzy-xacro ros-jazzy-joint-state-publisher-gui
 ```
+
+creating custom robot with collision box and inertial matrices
+

@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
 
+    <xacro:include filename="inertial_macros.xacro"/> <!-- Include the inertial macros for calculating inertia properties of links. -->
+
     <!-- materials -->
     <material name="grey">
         <color rgba="0.2 0.2 0.2 1"/>
@@ -42,6 +44,9 @@
                 <box size=".03 .1 .12" />
             </geometry>
         </collision>
+        <xacro:inertial_box mass="0.2" x=".03" y=".1" z=".12">
+            <origin xyz=".015 .05 .06" rpy="0 0 0"/>
+        </xacro:inertial_box>
     </link>
 
     <joint name="left_wheel_joint" type="continuous">
@@ -64,6 +69,9 @@
                 <cylinder length="0.025" radius="0.025" />
             </geometry>
         </collision>
+        <xacro:inertial_cylinder mass="0.1" length=".025" radius=".025">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
     </link>
 
     <joint name="right_wheel_joint" type="continuous">
@@ -86,6 +94,9 @@
                 <cylinder length="0.025" radius="0.025" />
             </geometry>
         </collision>
+        <xacro:inertial_cylinder mass="0.1" length=".025" radius=".025">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
     </link>
 
     <joint name="caster_wheel_joint" type="fixed">
@@ -99,7 +110,7 @@
             <geometry>
                 <sphere radius="0.0125" />
             </geometry>
-            <material name="black"/>
+            <material name="blue"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -107,6 +118,9 @@
                 <sphere radius="0.0125" />
             </geometry>
         </collision>
+        <xacro:inertial_sphere mass="0.05" radius="0.0125">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_sphere>
     </link>
 
 </robot>
