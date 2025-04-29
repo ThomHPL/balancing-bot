@@ -37,6 +37,7 @@ Add TF and RobotModel manually, or use rviz file in `rviz/view_robot.rviz`
 - [ ] Differential wheels robot mode
     - [ ] look at gazebo bridge configuration
     - [ ] add keyboard control for simulation
+    https://github.com/lucasmazzetto/gazebo_differential_drive_robot/tree/main
 
 - [ ] Balancing mode
     - [ ] add IMU sensor
