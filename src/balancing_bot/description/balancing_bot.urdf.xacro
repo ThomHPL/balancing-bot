@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+
+    <!-- materials -->
+    <material name="grey">
+        <color rgba="0.2 0.2 0.2 1"/>
+    </material>
+
+    <material name="white">
+        <color rgba=".9 .9 .9 .2"/>
+    </material>
+
+    <material name="orange">
+        <color rgba="1 0.3 0.1 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0 0 1 1"/>
+    </material>
+
+
+    <!-- This is a simple balancing bot with a base, two wheels, and a caster wheel. -->
+    <link name="base_link"></link>
+
+    <joint name="base_to_frame_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="frame_link"/>
+        <origin rpy="0 0 0" xyz="0 0 .105"/>
+    </joint>
+
+    <link name="frame_link">
+        <visual>
+            <origin xyz="0 0 -.06" rpy="0 0 0"/>
+            <geometry>
+                <box size=".03 .1 .12" />
+            </geometry>
+            <material name="white" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 -.06" rpy="0 0 0"/>
+            <geometry>
+                <box size=".03 .1 .12" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="left_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel_link"/>
+        <origin xyz="0 0.07 0" rpy="-${pi/2} 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="left_wheel_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.025" radius="0.025" />
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.025" radius="0.025" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="right_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel_link"/>
+        <origin xyz="0 -0.07 0" rpy="-${pi/2} 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="right_wheel_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.025" radius="0.025" />
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.025" radius="0.025" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="caster_wheel_joint" type="fixed">
+        <parent link="frame_link"/>
+        <child link="caster_wheel_link"/>
+        <origin xyz="0.0125 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="caster_wheel_link">
+        <visual>
+            <geometry>
+                <sphere radius="0.0125" />
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <sphere radius="0.0125" />
+            </geometry>
+        </collision>
+    </link>
+
+</robot>
