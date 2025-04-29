@@ -12,9 +12,6 @@
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
-  <exec_depend>demo_nodes_cpp</exec_depend>
-  <exec_depend>demo_nodes_py</exec_depend>
-
   <depend>ros_gz_sim</depend>
   <depend>tf2</depend>
   
