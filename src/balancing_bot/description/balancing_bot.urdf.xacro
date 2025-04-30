@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
 
     <xacro:include filename="inertial_macros.xacro"/> <!-- Include the inertial macros for calculating inertia properties of links. -->
+    <xacro:include filename="gazebo_control.xacro"/> <!-- Include the gazebo control macros for controlling the robot in Gazebo. -->
 
     <!-- materials -->
     <material name="grey">
@@ -22,10 +23,27 @@
 
 
     <!-- This is a simple balancing bot with a base, two wheels, and a caster wheel. -->
-    <link name="base_link"></link>
+    <link name="base_link">
+        <xacro:inertial_box mass="0.01" x="0.1" y="0.1" z="0.1">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
 
-    <joint name="base_to_frame_joint" type="fixed">
+    <joint name="base_to_base2_joint" type="continuous">
         <parent link="base_link"/>
+        <child link="base2_link"/>
+        <axis xyz="0 1 0"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+    </joint>
+
+    <link name="base2_link">
+        <xacro:inertial_box mass="0.01" x="0.1" y="0.1" z="0.1">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <joint name="base2_to_frame_joint" type="fixed">
+        <parent link="base2_link"/>
         <child link="frame_link"/>
         <origin rpy="0 0 0" xyz="0 0 .105"/>
     </joint>
@@ -44,16 +62,18 @@
                 <box size=".03 .1 .12" />
             </geometry>
         </collision>
-        <xacro:inertial_box mass="0.2" x=".03" y=".1" z=".12">
+        <xacro:inertial_box mass="0.05" x=".03" y=".1" z=".12">
             <origin xyz="0 0 -.06" rpy="0 0 0"/>
         </xacro:inertial_box>
     </link>
 
     <joint name="left_wheel_joint" type="continuous">
-        <parent link="base_link"/>
+        <parent link="base2_link"/>
         <child link="left_wheel_link"/>
         <origin xyz="0 0.07 0" rpy="-${pi/2} 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz="0 0 1">
+            <limit effort="10"/>
+        </axis>
     </joint>
 
     <link name="left_wheel_link">
@@ -69,16 +89,18 @@
                 <cylinder length="0.025" radius="0.025" />
             </geometry>
         </collision>
-        <xacro:inertial_cylinder mass="0.1" length=".025" radius=".025">
+        <xacro:inertial_cylinder mass="0.05" length=".025" radius=".025">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
 
     <joint name="right_wheel_joint" type="continuous">
-        <parent link="base_link"/>
+        <parent link="base2_link"/>
         <child link="right_wheel_link"/>
         <origin xyz="0 -0.07 0" rpy="-${pi/2} 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz="0 0 1">
+            <limit effort="10"/>
+        </axis>
     </joint>
 
     <link name="right_wheel_link">
@@ -94,7 +116,7 @@
                 <cylinder length="0.025" radius="0.025" />
             </geometry>
         </collision>
-        <xacro:inertial_cylinder mass="0.1" length=".025" radius=".025">
+        <xacro:inertial_cylinder mass="0.05" length=".025" radius=".025">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
@@ -118,7 +140,7 @@
                 <sphere radius="0.0125" />
             </geometry>
         </collision>
-        <xacro:inertial_sphere mass="0.05" radius="0.0125">
+        <xacro:inertial_sphere mass="0.1" radius="0.0125">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_sphere>
     </link>
@@ -128,4 +150,14 @@
         <mu1 value="0.001"/>
         <mu2 value="0.001"/>
     </gazebo>
+    <gazebo reference="left_wheel_link">
+        <mu1 value="0.85"/>
+        <mu2 value="0.85"/>
+    </gazebo>
+    <gazebo reference="right_wheel_link">
+        <mu1 value="0.85"/>
+        <mu2 value="0.85"/>
+    </gazebo>
+
+
 </robot>

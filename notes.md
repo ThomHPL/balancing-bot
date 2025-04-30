@@ -50,3 +50,11 @@ https://github.com/joshnewans/articubot_one/tree/new_gazebo
 
 migrating guide:
 https://gazebosim.org/docs/latest/migrating_gazebo_classic_ros2_packages/
+
+## control
+
+add gazebo_control.xacro using DiffDrive plugin to manage differentail drive control
+using JointStatePublisher to publish joint states to ros
+add gz_bridge.yaml to bridge topics between ros and gazebo
+
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
